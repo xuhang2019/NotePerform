@@ -1,5 +1,16 @@
 This document saves knowledge gained in this source code.
 
+## Development modification record
+
+Create Date: 2023.2.3
+Branch: dev
+
+Useful git command:
+```git
+git checkout -b <branch_name> # create a new branch and switch to it.
+git push origin <branch_name>
+```
+
 ## Electron
 
 main process: main.js, control different render processes, such as index.js (render index.html) 
@@ -37,7 +48,9 @@ CodeMirror is a code **highlight** editor in JavaScript. (introduce .css and .js
 
 `html: lib\codemirror.js`
 
-## TODO: modify `parseContent.js` **code analysis**
+## TODO: modify `parseContent.js` 
+
+**code analysis**
 
 class:
     BeatInfo
