@@ -5,10 +5,16 @@ This document saves knowledge gained in this source code.
 Create Date: 2023.2.3
 Branch: dev
 
-Useful git command:
-```git
+Useful operation:
+```
+# git
 git checkout -b <branch_name> # create a new branch and switch to it.
 git push origin <branch_name>
+
+
+
+# visual studio code
+command+shift+F: search globally
 ```
 
 ## Electron
@@ -49,6 +55,13 @@ CodeMirror is a code **highlight** editor in JavaScript. (introduce .css and .js
 `html: lib\codemirror.js`
 
 ## TODO: modify `parseContent.js` 
+
+- [ ] add major = A2 
+`token <- lib/musicnotes.js CodeMirror.defineSimpleMode (a state machine)`
+(very difficult)
+involved: parsedContent.js, index.js, index.html (display)
+Actually, I didn't see the parse title process in parsedContent.js. (Here, the content is packaged in a class)
+    - [ ] modify token type in parsedContent.js, still require modification in index and check errors.
 
 **code analysis**
 

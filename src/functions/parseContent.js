@@ -162,19 +162,28 @@ module.exports.parseContent = function (editor) {
         title: '',
         composer: '',
         compiler: '',
+        major: '',
         bpm: 80,
-        beatInfo: new BeatInfo(4, 1),
+        beatInfo: new BeatInfo(4, 4),
         headEndAtLine: 0
     };
     let stage = 1;
     let property = ''; // stage 1
     // operator // stage 2
     let value = null; // stage 3
+
+    let isDev = 1
     outerFor: for(let i=0; i<lineCount; i++)
     {
+        if(isDev){
+            console.log("line:", i)
+        }
         const tokens = editor.getLineTokens(i);
         for(let token of tokens)
         {
+            if(isDev){
+                console.log("    token:", token.type)
+            }
             if(token.type === 'tone' || token.type === 'note')
             {
                 headInfo.headEndAtLine = i-1;
@@ -211,11 +220,18 @@ module.exports.parseContent = function (editor) {
                                 value = new BeatInfo(+token.string.slice(1,2),
                                     +token.string.slice(3, token.string.length-1)/4);
                             break;
+                        case 'major':
+                            if(token.type === 'majorNumber')
+                                value = +token.string;
+                            break;
                     }
                     break;
                 default:
                     break;
             }
+            // above is a state machine fetching process
+            // keyword (s1) -> operator (s2) -> value (s3)
+            // below is a process storing this {keyword, value} pair in headInfo.
             if(value != null)
             {
                 headInfo[property] = value;
