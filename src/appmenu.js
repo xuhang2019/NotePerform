@@ -72,7 +72,7 @@ module.exports.appMenuTemplate = [
     submenu: [
       {
         label: language.homePage,
-        click() { electron.shell.openExternal('https://github.com/xieby1/DaPuJi'); },
+        click() { electron.shell.openExternal('https://github.com/xuhang2019/NotePerform'); },
       },
     ],
   },

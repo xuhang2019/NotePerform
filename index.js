@@ -9,7 +9,8 @@ const editArea = document.getElementById('editArea');
 const title = document.getElementById('title');
 const composer = document.getElementById('composer');
 const compiler = document.getElementById('compiler');
-const bpm_beatInfo = document.getElementById('bpm_beatInfo');
+const major = document.getElementById('major');
+const major_bpm_beatInfo = document.getElementById('bpm_beatInfo');
 const katexDisplayArea = document.getElementById('katexDisplayArea');
 
 let currentFile = null;
@@ -20,6 +21,7 @@ let parsedContent = {};
 const editor = CodeMirror(editArea, {
     // 编辑器的初始内容
     value: 'title = "To Zanarkand - 片段"\n' +
+        'major = {A2}\n' +
         'bpm = 92 beatInfo={3/4}\n' +
         '\n' +
         '3+/ 3/ 5/ 7/ 3+/ 4#/+ 5+..\n' +
@@ -41,9 +43,10 @@ function drawDisplayArea()
 {
     parsedContent = parseContent(editor);
     let headInfo = parsedContent.headInfo;
+    console.log(headInfo)
     title.innerText = headInfo.title;
     composer.innerText = headInfo.composer;
-    bpm_beatInfo.innerText = 'bpm='+headInfo.bpm + ' '
+    major_bpm_beatInfo.innerText = headInfo.major + ' ' + 'bpm='+headInfo.bpm + ' '
         + headInfo.beatInfo.beatsNumber + '/' + headInfo.beatInfo.baseBeat*4;
 
 
@@ -67,6 +70,7 @@ function drawDisplayArea()
 
 drawDisplayArea();
 
+// TODO: modify the drawDisplayArea Time, not "on change", while on leave the editor area.
 editor.on('change', ()=>{
     if(isSaved)
         document.title += ' *';

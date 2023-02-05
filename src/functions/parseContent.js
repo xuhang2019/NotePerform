@@ -157,7 +157,7 @@ module.exports.parseContent = function (editor) {
 
     const lineCount = editor.lineCount();
 
-    // parse head
+    // parse headInfo
     let headInfo = {
         title: '',
         composer: '',
@@ -165,30 +165,26 @@ module.exports.parseContent = function (editor) {
         major: '',
         bpm: 80,
         beatInfo: new BeatInfo(4, 4),
-        headEndAtLine: 0
+        headEndAtLine: 0,
     };
     let stage = 1;
     let property = ''; // stage 1
     // operator // stage 2
     let value = null; // stage 3
 
-    let isDev = 1
     outerFor: for(let i=0; i<lineCount; i++)
     {
-        if(isDev){
-            console.log("line:", i)
-        }
+
         const tokens = editor.getLineTokens(i);
         for(let token of tokens)
         {
-            if(isDev){
-                console.log("    token:", token.type)
-            }
+            // read the end of headInfo line
             if(token.type === 'tone' || token.type === 'note')
             {
                 headInfo.headEndAtLine = i-1;
                 break outerFor;
             }
+            // process the headInfo part
             switch (stage) {
                 case 1:
                     if(token.type === 'keyword')
@@ -208,7 +204,7 @@ module.exports.parseContent = function (editor) {
                         case 'title':
                         case 'composer':
                         case 'compiler':
-                            if(token.type === 'string')
+                            if(token.type === 'string') // title matchs string
                                 value = token.string.slice(1, token.string.length-1);
                             break;
                         case 'bpm':
@@ -222,7 +218,7 @@ module.exports.parseContent = function (editor) {
                             break;
                         case 'major':
                             if(token.type === 'majorNumber')
-                                value = +token.string;
+                                value = token.string.slice(1, token.string.length-1); // e.g, {A2} -> A2
                             break;
                     }
                     break;

@@ -56,14 +56,28 @@ CodeMirror is a code **highlight** editor in JavaScript. (introduce .css and .js
 
 ## TODO: modify `parseContent.js` 
 
-- [ ] add major = A2 
+- [x] add major = A2 
 `token <- lib/musicnotes.js CodeMirror.defineSimpleMode (a state machine)`
 (very difficult)
 involved: parsedContent.js, index.js, index.html (display)
 Actually, I didn't see the parse title process in parsedContent.js. (Here, the content is packaged in a class)
-    - [ ] modify token type in parsedContent.js, still require modification in index and check errors.
+    - [x] modify token type in parsedContent.js, still require modification in index and check errors.
+    - [x] check if parseContent function remains error.
+2023.2.5
+
+- [ ] add a button or leave area to activate `drawdisplayarea`. (actually, is about a callback function.)
+2023.2.5
+
+- [ ] allow the major propety to tune the sound.
+- [ ] cut down useless functions.
 
 **code analysis**
+
+***Whole procedure***:
+    1. index.js: input code (editor)
+    2. musicnote.js: define the rule of editor, a state machine
+    3. parseContent.js: process code into `parsedContent` based on `musicnote.js`
+    4. index.js: `drawDisplayArea`, load `parsedContent`, render to html and katex. (title, major: html; musicnotes: katex)
 
 class:
     BeatInfo
