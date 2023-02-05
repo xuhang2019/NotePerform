@@ -9,8 +9,7 @@ const editArea = document.getElementById('editArea');
 const title = document.getElementById('title');
 const composer = document.getElementById('composer');
 const compiler = document.getElementById('compiler');
-const major = document.getElementById('major');
-const major_bpm_beatInfo = document.getElementById('bpm_beatInfo');
+const major_bpm_beatInfo = document.getElementById('major_bpm_beatInfo');
 const katexDisplayArea = document.getElementById('katexDisplayArea');
 
 let currentFile = null;
@@ -70,8 +69,8 @@ function drawDisplayArea()
 
 drawDisplayArea();
 
-// TODO: modify the drawDisplayArea Time, not "on change", while on leave the editor area.
-editor.on('change', ()=>{
+// modify the drawDisplayArea Time, not "on change", -> blur
+editor.on('blur', ()=>{
     if(isSaved)
         document.title += ' *';
     isSaved = false;

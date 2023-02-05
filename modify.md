@@ -65,7 +65,8 @@ Actually, I didn't see the parse title process in parsedContent.js. (Here, the c
     - [x] check if parseContent function remains error.
 2023.2.5
 
-- [ ] add a button or leave area to activate `drawdisplayarea`. (actually, is about a callback function.)
+- [x] add a button or leave area to activate `drawdisplayarea`. (actually, is about a callback function.)
+on change -> on blur
 2023.2.5
 
 - [ ] allow the major propety to tune the sound.
