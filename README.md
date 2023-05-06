@@ -69,7 +69,7 @@ Actually, I didn't see the parse title process in parsedContent.js. (Here, the c
 on change -> on blur
 2023.2.5
 
-- [ ] allow the major propety to tune the sound.
+- [ ] allow the major property to tune the sound.
 - [ ] cut down useless functions.
 
 **code analysis**
@@ -104,7 +104,7 @@ class:
 function:
     createLatexChar
 
-LETTERNOTATION
+LETTERNOTATION ?
 
 module.exports.parseContent: -> new ParsedContent 
     apply pre-defined classes

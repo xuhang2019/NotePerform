@@ -21,6 +21,7 @@ class MusicalNote
 }
 
 const LETTERNOTATION = [null, 60, 62, 64, 65, 67, 69, 71];
+const LETTERDICT={'C':0,"D":2,"E":4,"F":5,"G":7,"A":9,"B":11};
 class ParsedContent
 {
     constructor(headInfo, bodyInfo)
@@ -34,6 +35,10 @@ class ParsedContent
         let bpm = this.headInfo.bpm; // 每分钟拍数
         let baseBeat = this.headInfo.beatInfo.baseBeat; // 表示四分音符为baseBeat拍
         let timeAcc = 0; //累计时间
+        let majorAlaphabet = this.headInfo.major[0];
+        let majorNumber = this.headInfo.major[1];
+        let majorPreset = (majorNumber-4)*12 + LETTERDICT[majorAlaphabet];
+
 
         for(let lineInfo of this.bodyInfo)
         {
@@ -44,7 +49,12 @@ class ParsedContent
                 let height = musicalNote.height;
                 let length = musicalNote.length;
 
-                events.push({time: timeAcc, note: LETTERNOTATION[tone]+height*12+step});
+                // 3+ : tone=3, step=0 (b or #), height = 1 (1 octvave higher), length = 0.5 (1/2 beat)
+                // console.log(tone, step, height, length);
+
+                let note = LETTERNOTATION[tone]+height*12+step+majorPreset;
+                console.log(note);
+                events.push({time: timeAcc, note: note});
                 timeAcc += length*baseBeat/bpm*60;
             }
         }
